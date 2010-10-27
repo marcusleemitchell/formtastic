@@ -939,7 +939,7 @@ module Formtastic #:nodoc:
         end
 
         template.content_tag(:fieldset,
-          legend_tag(method, options) << template.content_tag(:ol, Formtastic::Util.html_safe(list_item_content.join))
+          legend_tag(method, options) << template.content_tag(:ol, Formtastic::Util.html_safe(list_item_content.join), :id => "formtastic_ordered_list")
         )
       end
 
@@ -1184,7 +1184,7 @@ module Formtastic #:nodoc:
 
         fieldset_content = legend_tag(method, options)
         fieldset_content << self.create_hidden_field_for_check_boxes(input_name, value_as_class) unless hidden_fields
-        fieldset_content << template.content_tag(:ol, Formtastic::Util.html_safe(list_item_content.join))
+        fieldset_content << template.content_tag(:ol, Formtastic::Util.html_safe(list_item_content.join), :id => "formtastic_ordered_list")
         template.content_tag(:fieldset, fieldset_content)
       end
 
@@ -1368,7 +1368,7 @@ module Formtastic #:nodoc:
         # Ruby 1.9: String#to_s behavior changed, need to make an explicit join.
         contents = contents.join if contents.respond_to?(:join)
         fieldset = template.content_tag(:fieldset,
-          Formtastic::Util.html_safe(legend) << template.content_tag(:ol, Formtastic::Util.html_safe(contents)),
+          Formtastic::Util.html_safe(legend) << template.content_tag(:ol, Formtastic::Util.html_safe(contents), :id => "formtastic_ordered_list"),
           html_options.except(:builder, :parent)
         )
 
@@ -1400,7 +1400,7 @@ module Formtastic #:nodoc:
             template.content_tag(:legend,
                 self.label(method, options_for_label(options).merge(:for => options.delete(:label_for))), :class => 'label'
               ) <<
-            template.content_tag(:ol, Formtastic::Util.html_safe(contents))
+            template.content_tag(:ol, Formtastic::Util.html_safe(contents), :id => "formtastic_ordered_list")
           )
       end
 
